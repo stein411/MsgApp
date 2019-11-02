@@ -32,7 +32,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def add_new_tab(self, user_name):
         ''' Add tab with user's name. '''
         if user_name not in self.tab_names:
-            new_tab = ChatTab()
+            new_tab = ChatTab(self)
             self.tabs.append(new_tab)
             self.tab_names.append(user_name)
             self.tab_widget.addTab(new_tab, user_name)
