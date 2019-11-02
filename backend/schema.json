@@ -1,0 +1,17 @@
+{
+    "users": {
+        "name": "string",
+        "password-hash": "string",
+        "id": "integer"
+    },
+    "conversations": {
+        "id": "integer",
+        "user_ids": "list"
+    },
+    "messages": {
+        "id": "integer",
+        "conv-id": "integer",
+        "timestamp": "datetime",
+        "author_id": "integer"
+    }
+}
