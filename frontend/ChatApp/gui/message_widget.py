@@ -1,5 +1,6 @@
 ''' message_widget module. '''
 from PyQt5 import QtWidgets
+from PyQt5.QtCore import Qt
 
 class MessageWidget(QtWidgets.QWidget):
     ''' Message widget class. '''
@@ -14,6 +15,10 @@ class MessageWidget(QtWidgets.QWidget):
         self._init_ui()
 
     def _init_ui(self):
+        self.setAutoFillBackground(True)
+        palette = self.palette()
+        palette.setColor(self.backgroundRole(), Qt.green)
+        self.setPalette(palette)
         self._layout = QtWidgets.QVBoxLayout()
 
         self.timestamp = QtWidgets.QLabel(self.time_str)
@@ -21,6 +26,4 @@ class MessageWidget(QtWidgets.QWidget):
 
         self._layout.addWidget(self.timestamp)
         self._layout.addWidget(self.message_content)
-
         self.setLayout(self._layout)
-        self.setFixedHeight(50)

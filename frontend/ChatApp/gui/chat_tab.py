@@ -45,7 +45,6 @@ class ChatTab(QtWidgets.QWidget):
             self._send_clicked()
 
     def _send_clicked(self):
-        print('send clicked')
         time_str = datetime.now().strftime('%m/%d/%y %I:%M %p')
         msg_widget = MessageWidget(self.message_enter.text(), time_str, parent=self)
         self.message_widgets.append(msg_widget)

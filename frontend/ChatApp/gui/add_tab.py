@@ -27,6 +27,4 @@ class AddTab(QtWidgets.QWidget):
         self.setLayout(self._layout)
 
     def _add_tab_clicked(self):
-        print('add tab clicked')
-
         self.parent.add_new_tab(self.users_name.text())
