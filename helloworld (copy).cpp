@@ -1,6 +1,5 @@
 #include <iostream> // cin, cout
 #include <speechapi_cxx.h>
-#include <fstream>
 
 using namespace std;
 using namespace Microsoft::CognitiveServices::Speech;
@@ -15,13 +14,10 @@ void synthesizeSpeech()
     auto synthesizer = SpeechSynthesizer::FromConfig(config);
 
     // Receive a text from console input and synthesize it to speaker.
-    //cout << "Type some text that you want to speak..." << std::endl;
-    //cout << "> ";
-
+    cout << "Type some text that you want to speak..." << std::endl;
+    cout << "> ";
     std::string text;
-	ifstream file; // declares file to read from
-	file.open("lines_to_synth"); // opens the file
-	std::getline(file, text); // gets the first line in the file
+    getline(cin, text);
 
     auto result = synthesizer->SpeakTextAsync(text).get();
 
@@ -46,7 +42,6 @@ void synthesizeSpeech()
     // This is to give some time for the speaker to finish playing back the audio
     cout << "Press enter to exit..." << std::endl;
     cin.get();
-	file.close;
 }
 
 int main(int argc, char **argv) {
