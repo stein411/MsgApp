@@ -1,6 +1,7 @@
+require('dotenv/config');
 const express = require('express');
+const mongoose = require('mongoose')
 const bodyParser = require('body-parser');
-
 const app = express();
 
 // Routes
@@ -20,3 +21,7 @@ var port = 3000;
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
 });
+
+const db = () => {
+    return mongo
+}

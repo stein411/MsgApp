@@ -1,10 +1,14 @@
 var mongoose = require('mongoose');
-
+var Schema = mongoose.Schema;
+var connection = mongoose.createConnection("mongodb://localhost/test");
+var autoIncrement = require('mongoose-auto-increment');
+autoIncrement.initialize(connection);
 var conversationSchema = new mongoose.Schema({
-    id: int,
-    user_ids: list
+    id: Number,
+    user_ids: Array
 });
 
-var Conversation = mongoose.model('Conversation', convesrationSchema);
+conversationSchema.plugin(autoIncrement.plugin, 'Conversation');
+var Conversation = mongoose.model('Conversation', conversationSchema);
 
 module.exports = Conversation;
