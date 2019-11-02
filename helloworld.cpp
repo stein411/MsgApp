@@ -46,7 +46,7 @@ void synthesizeSpeech()
     // This is to give some time for the speaker to finish playing back the audio
     cout << "Press enter to exit..." << std::endl;
     cin.get();
-	file.close;
+	//file.close;
 }
 
 int main(int argc, char **argv) {
