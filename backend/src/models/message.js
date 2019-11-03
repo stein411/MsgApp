@@ -5,7 +5,8 @@ var messageSchema = new mongoose.Schema({
     id: Number,
     conv_id: Number,
     timestamp: Date,
-    author_id: String
+    author_id: String,
+    content: String
 });
 
 messageSchema.plugin(autoIncrement.plugin, 'Message');

@@ -15,12 +15,14 @@ router.post('/', (req, res) => {
     
 });
 router.get('/', (req, res) => {
-    convo.find({user_ids: req.query.user_id1}, (err, docs) => {
-        if (err) {
-            return res.send(err);
-        }
-        return res.send(docs);
-    })
+    if (typeof req.query.user_id1 !== 'undefined') {
+        convo.find({user_ids: req.query.user_id1}, (err, docs) => {
+            if (err) {
+                return res.send(err);
+            }
+            return res.send(docs);
+        })
+    }
 })
 
 module.exports = router;
