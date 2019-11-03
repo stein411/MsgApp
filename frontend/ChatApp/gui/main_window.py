@@ -34,30 +34,33 @@ class MainWindow(QtWidgets.QMainWindow):
         self.setCentralWidget(self.tab_widget)
 
     def tab_selected(self, index):
-        name = self.tab_names[index-1]
-        tab = self.tabs[index-1]
-        import requests
-        import json
-        resp = requests.get(f'http://localhost:3000/api/users?name={name}')
-        obj = json.loads(resp.content.decode('utf-8'))
-        other_id = obj['_id']
-        if int(other_id) > self.user_id:
-            resp = requests.get(f'http://localhost:3000/api/conversations?user_id1={self.user_id}&user_id2={other_id}')
-        else:
-            resp = requests.get(f'http://localhost:3000/api/conversations?user_id1={other_id}&user_id2={self.user_id}')
         try:
+            name = self.tab_names[index-1]
+            tab = self.tabs[index-1]
+            import requests
+            import json
+            resp = requests.get(f'http://localhost:3000/api/users?name={name}')
             obj = json.loads(resp.content.decode('utf-8'))
-            conv_id = obj['_id']
-            resp = requests.get(f'http://localhost:3000/api/messages?conv_id={conv_id}')
-            obj = json.loads(resp.content.decode('utf-8'))
-            for msg in obj:
-                tab.message_enter.setText(msg['content'])
-                tab.send_clicked(from_here=False)
-        except KeyError:
+            other_id = obj['_id']
+            if int(other_id) > self.user_id:
+                resp = requests.get(f'http://localhost:3000/api/conversations?user_id1={self.user_id}&user_id2={other_id}')
+            else:
+                resp = requests.get(f'http://localhost:3000/api/conversations?user_id1={other_id}&user_id2={self.user_id}')
+            try:
+                obj = json.loads(resp.content.decode('utf-8'))
+                conv_id = obj['_id']
+                resp = requests.get(f'http://localhost:3000/api/messages?conv_id={conv_id}')
+                obj = json.loads(resp.content.decode('utf-8'))
+                for msg in obj:
+                    tab.message_enter.setText(msg['content'])
+                    tab.send_clicked(from_here=False)
+            except KeyError:
+                pass
+            # self.tabs[index-1].message_enter.setText('yes')
+            # self.tabs[index-1].send_clicked()
+            # print(self.tab_names[index-1])
+        except Exception:
             pass
-        # self.tabs[index-1].message_enter.setText('yes')
-        # self.tabs[index-1].send_clicked()
-        # print(self.tab_names[index-1])
 
     def add_new_tab(self, user_name):
         ''' Add tab with user's name. '''
@@ -73,20 +76,23 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def populate_chats(self):
         import requests
-        resp = requests.get('http://localhost:3000/api/conversations', {"user_id1": self.user_id})
-        import json
-        obj = json.loads(resp.content.decode('utf-8'))
-        #print(obj)
-        for item in obj:
-            other_id = -1
-            for id in item['user_ids']:
-                if int(id) != self.user_id:
-                    other_id = id
-            if int(other_id) >= 0:
-                resp = requests.get(f'http://localhost:3000/api/users?id={other_id}')
-                if resp.content:
-                    resp_obj = json.loads(resp.content.decode('utf-8'))
-                    other_name = resp_obj['name']
-                    if other_name not in self.tab_names:
-                        self.add_new_tab(other_name)
+        try:
+            resp = requests.get('http://localhost:3000/api/conversations', {"user_id1": self.user_id})
+            import json
+            obj = json.loads(resp.content.decode('utf-8'))
+            #print(obj)
+            for item in obj:
+                other_id = -1
+                for id in item['user_ids']:
+                    if int(id) != self.user_id:
+                        other_id = id
+                if int(other_id) >= 0:
+                    resp = requests.get(f'http://localhost:3000/api/users?id={other_id}')
+                    if resp.content:
+                        resp_obj = json.loads(resp.content.decode('utf-8'))
+                        other_name = resp_obj['name']
+                        if other_name not in self.tab_names:
+                            self.add_new_tab(other_name)
+        except Exception:
+            pass
 
