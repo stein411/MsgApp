@@ -1,14 +1,12 @@
 var mongoose = require('mongoose');
-
+var autoIncrement = require('../routes/api/db_connection');
 var userSchema = new mongoose.Schema({
     name: String,
     password: String,
-    id: int
+    id: Number
 });
 
-//need to create join conversation method?
-userSchema.methods.send = function () {
-}
+userSchema.plugin(autoIncrement.plugin, 'User');
 
 var User = mongoose.model('User', userSchema);
 

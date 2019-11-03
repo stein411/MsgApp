@@ -16,12 +16,21 @@ router.post('/', (req, res) => {
 });
 router.get('/', (req, res) => {
     if (typeof req.query.user_id1 !== 'undefined') {
-        convo.find({user_ids: req.query.user_id1}, (err, docs) => {
-            if (err) {
-                return res.send(err);
-            }
-            return res.send(docs);
-        })
+        if (typeof req.query.user_id2 !== 'undefined') {
+            convo.findOne({user_ids: [req.query.user_id1, req.query.user_id2]}, (err, doc) => {
+                if (err) {
+                    return res.send(err);
+                }
+                return res.send(doc);
+            });
+        } else {
+            convo.find({user_ids: req.query.user_id1}, (err, docs) => {
+                if (err) {
+                    return res.send(err);
+                }
+                return res.send(docs);
+            });
+        }
     }
 })
 
