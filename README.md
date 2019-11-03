@@ -13,7 +13,8 @@ The chat app uses node.js, c++, python, and mongoDB. This also uses [Microsoft's
 # Initializing Text-to-Speech
 For the first time running the application, you must run [`compile.sh`](compile.sh) by running the following bash command:
 ```bash
-./compile.sh```
+./compile.sh
+```
 You will need sudo privileges for this to run. If you want to manually configure your OS follow the steps provided on this [website](https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/quickstart-text-to-speech-cpp-linux).
 
 # How does Text-to-Speech work?
