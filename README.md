@@ -1,6 +1,6 @@
 # README
 This is a messaging application created for the HackOH/IO Hackathon 2019.
-The chat app uses node.js, c++, python, and mongoDB. This also uses Microsoft's Azure services for text-to-speech processing. To run the program, follow the steps below.
+The chat app uses node.js, c++, python, and mongoDB. This also uses [Microsoft's Azure](https://azure.microsoft.com/en-us/services/cognitive-services/) services for text-to-speech processing. To run the program, follow the steps below.
 
 ### Requirements
 | Requirement |
