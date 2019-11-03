@@ -1,4 +1,4 @@
-#apt-get install build-essential libssl1.0.0 libasound2 wget
+sudo apt-get install build-essential libssl1.0.0 libasound2 wget
 export SPEECHSDK_ROOT="text_to_speech"
 
 # compile the program
