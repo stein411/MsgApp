@@ -3,7 +3,6 @@ This is a messaging application created for the HackOH/IO Hackathon 2019.
 The chat app uses node.js, c++, python, and mongoDB. This also uses Microsoft's Azure services for text-to-speech processing. To run the program, follow the steps below.
 
 ### Requirements
-*If you do not want to use the text-to-speech capability, you may use Windows as the OS
 | Requirement |
 | ------------ |
 |`Linux (tested on Ubuntu 18.04)` |
