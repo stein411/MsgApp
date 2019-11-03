@@ -30,7 +30,34 @@ class MainWindow(QtWidgets.QMainWindow):
         self.tab_widget = QtWidgets.QTabWidget(self)
         self.add_tab = AddTab(self)
         self.tab_widget.addTab(self.add_tab, '+')
+        self.tab_widget.currentChanged.connect(self.tab_selected)
         self.setCentralWidget(self.tab_widget)
+
+    def tab_selected(self, index):
+        name = self.tab_names[index-1]
+        tab = self.tabs[index-1]
+        import requests
+        import json
+        resp = requests.get(f'http://localhost:3000/api/users?name={name}')
+        obj = json.loads(resp.content.decode('utf-8'))
+        other_id = obj['_id']
+        if int(other_id) > self.user_id:
+            resp = requests.get(f'http://localhost:3000/api/conversations?user_id1={self.user_id}&user_id2={other_id}')
+        else:
+            resp = requests.get(f'http://localhost:3000/api/conversations?user_id1={other_id}&user_id2={self.user_id}')
+        try:
+            obj = json.loads(resp.content.decode('utf-8'))
+            conv_id = obj['_id']
+            resp = requests.get(f'http://localhost:3000/api/messages?conv_id={conv_id}')
+            obj = json.loads(resp.content.decode('utf-8'))
+            for msg in obj:
+                tab.message_enter.setText(msg['content'])
+                tab.send_clicked(from_here=False)
+        except KeyError:
+            pass
+        # self.tabs[index-1].message_enter.setText('yes')
+        # self.tabs[index-1].send_clicked()
+        # print(self.tab_names[index-1])
 
     def add_new_tab(self, user_name):
         ''' Add tab with user's name. '''
