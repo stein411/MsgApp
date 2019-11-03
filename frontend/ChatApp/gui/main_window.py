@@ -19,6 +19,9 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self._init_ui()
 
+        self.user_id = 1 # TODO get rid of this
+        self.populate_chats()
+
         self.show()
 
     def _init_ui(self):
@@ -40,3 +43,23 @@ class MainWindow(QtWidgets.QMainWindow):
             QtWidgets.QMessageBox.warning(self, self._window_title, f'Chat {user_name} exists!')
         # TODO POST to /conversations
         # add the user's json
+
+    def populate_chats(self):
+        import requests
+        resp = requests.get('http://localhost:3000/api/conversations', {"user_id1": self.user_id})
+        import json
+        obj = json.loads(resp.content.decode('utf-8'))
+        #print(obj)
+        for item in obj:
+            other_id = -1
+            for id in item['user_ids']:
+                if int(id) != self.user_id:
+                    other_id = id
+            if int(other_id) >= 0:
+                resp = requests.get(f'http://localhost:3000/api/users?id={other_id}')
+                if resp.content:
+                    resp_obj = json.loads(resp.content.decode('utf-8'))
+                    other_name = resp_obj['name']
+                    if other_name not in self.tab_names:
+                        self.add_new_tab(other_name)
+
