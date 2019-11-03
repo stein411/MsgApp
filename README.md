@@ -4,6 +4,8 @@ The chat app uses node.js, c++, python, and mongoDB. This also uses Microsoft's 
 
 ### Requirements
 *If you do not want to use the text-to-speech capability, you may use Windows as the OS
+| Requirement |
+| ------------ |
 |`Linux (tested on Ubuntu 18.04)` |
 |`node.js (apt-get install nodejs)` |
 |`python 3+ (apt-get install python)` |
