@@ -11,7 +11,10 @@ The chat app uses node.js, c++, python, and mongoDB. This also uses [Microsoft's
 |`sudo` priviliges |
 
 # Initializing Text-to-Speech
-### Note this is optional
+For the first time running the application, you must run [`compile.sh`](compile.sh) by running the following bash command:
+```bash
+./compile.sh```
+You will need sudo privileges for this to run. If you want to manually configure your OS follow the steps provided on this [website](https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/quickstart-text-to-speech-cpp-linux).
 
 # How does Text-to-Speech work?
 Text-to-Speech uses Microsoft's Azure Cognitive Speech neural network to convert a line of text to speech. The [c++ speech file](helloworld.cpp) takes an input from a [file](lines_to_synth) and converts it to speech. The original code was found at this [link](https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/quickstart-text-to-speech-cpp-linux). The messaging app can write to the `lines_to_synth` file and that app runs the `run.sh` shell script to run the `text_to_speech_program`.
