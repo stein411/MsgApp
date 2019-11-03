@@ -6,7 +6,7 @@ const app = express();
 
 // Routes
 const conversations = require('./routes/api/conversations');
-console.log(process.env)
+// console.log(process.env)
 app.use(
     bodyParser.urlencoded({
         extended: true

@@ -3,9 +3,9 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 
-var connection = mongoose.createConnection("mongodb://localhost/test");
-var autoIncrement = require('mongoose-auto-increment');
-autoIncrement.initialize(connection);
+// var connection = mongoose.createConnection("mongodb://localhost/test");
+// var autoIncrement = require('mongoose-auto-increment');
+// autoIncrement.initialize(connection);
 
 const url = process.env.MONGODB_URI 
 mongoose.connect(url, {useNewUrlParser: true});
