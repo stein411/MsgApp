@@ -2,8 +2,8 @@ var mongoose = require('mongoose');
 var autoIncrement = require('../routes/api/db_connection');
 
 var messageSchema = new mongoose.Schema({
-    id: int,
-    conv_id: int,
+    id: Number,
+    conv_id: Number,
     timestamp: Date,
     author_id: String
 });
